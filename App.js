@@ -1,15 +1,25 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Button, TextInput } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  TextInput,
+  ScrollView,
+  FlatList,
+} from "react-native";
 
 export default function App() {
   const [goal, setGoal] = useState("");
-  const [courseGoals, setCourseGoals] = useState([])
+  const [courseGoals, setCourseGoals] = useState([]);
 
   const addGoalHandler = () => {
-    setCourseGoals(prevGoals => [...prevGoals, goal], console.log(courseGoals))
-    
-  }
+    setCourseGoals(
+      (prevGoals) => [...prevGoals, { uid: Math.random().toString(), value: goal }],
+      console.log(courseGoals)
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -23,18 +33,15 @@ export default function App() {
 
         <Button title="ADD" onPress={addGoalHandler} />
       </View>
-      <View>
-        
-          {courseGoals.map(courseGoal => (
-            <View key={courseGoal} style={styles.listItems}>
-              <Text >{courseGoal}</Text>
-            </View>
-            
-          ))}
-        
-        
-      </View>
-      
+      <FlatList
+        keyExtractor={(item, index) => item.uid}
+        data={courseGoals}
+        renderItem={(itemData) => (
+          <View style={styles.listItems}>
+            <Text>{itemData.item.value}</Text>
+          </View>
+        )}
+      />
     </View>
   );
 }
@@ -58,6 +65,6 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     backgroundColor: "#ccc",
     borderColor: "black",
-    borderWidth: 1
-  }
+    borderWidth: 1,
+  },
 });

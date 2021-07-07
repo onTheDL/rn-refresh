@@ -1,24 +1,22 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
-export default function ListItem({title}) {
+export default function ListItem({ id, title, handleDelete }) {
   return (
-    <View style={styles.listItems}>
-      <Text>{title}</Text>
-    </View>
+    <TouchableOpacity onPress={() => handleDelete(id)}>
+      <View style={styles.listItem}>
+        <Text>{title}</Text>
+      </View>
+    </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
-  listItems: {
+  listItem: {
     padding: 10,
     marginVertical: 10,
     backgroundColor: "#ccc",
     borderColor: "black",
     borderWidth: 1,
   },
-})
+});

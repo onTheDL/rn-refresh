@@ -1,18 +1,20 @@
 import React from "react";
-import { StyleSheet, View, Button, TextInput } from "react-native";
+import { StyleSheet, View, Button, TextInput, Modal } from "react-native";
 
-export default function Input({ inputValue, handleInput, handleSubmit }) {
+export default function Input({ inputValue, handleInput, handleSubmit, visible }) {
   return (
-    <View style={styles.inputContainer}>
-      <TextInput
-        placeholder="Course Goal"
-        style={styles.input}
-        onChangeText={(input) => handleInput(input)}
-        value={inputValue}
-      />
+    <Modal visible={visible} animationType="slide">
+      <View style={styles.inputContainer}>
+        <TextInput
+          placeholder="Course Goal"
+          style={styles.input}
+          onChangeText={(input) => handleInput(input)}
+          value={inputValue}
+        />
 
-      <Button title="ADD" onPress={handleSubmit} />
-    </View>
+        <Button title="ADD" onPress={handleSubmit} />
+      </View>
+    </Modal>
   );
 }
 

@@ -21,7 +21,7 @@ export default function App() {
         ...prevGoals,
         { uid: Math.random().toString(), value: goal },
       ],
-      console.log(courseGoals)
+      setIsAddMode(false)
     );
   };
 
@@ -38,7 +38,9 @@ export default function App() {
         visible={isAddMode}
         handleInput={setGoal}
         inputValue={goal}
+        setInput={setGoal}
         handleSubmit={addGoalHandler}
+        setIsAddMode={setIsAddMode}
       />
 
       <FlatList

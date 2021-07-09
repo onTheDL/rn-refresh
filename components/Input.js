@@ -1,13 +1,18 @@
 import React from "react";
 import { StyleSheet, View, Button, TextInput, Modal } from "react-native";
 
-export default function Input({ inputValue, setInput, handleInput, handleSubmit, visible, setIsAddMode }) {
-
-
+export default function Input({
+  inputValue,
+  setInput,
+  handleInput,
+  handleSubmit,
+  visible,
+  setIsAddMode,
+}) {
   const handleAddGoal = () => {
-    handleSubmit(inputValue)
-    setInput('')
-  }
+    handleSubmit(inputValue);
+    setInput("");
+  };
 
   return (
     <Modal visible={visible} animationType="slide">
@@ -18,8 +23,14 @@ export default function Input({ inputValue, setInput, handleInput, handleSubmit,
           onChangeText={(input) => handleInput(input)}
           value={inputValue}
         />
-        <Button title="CANCEL" color="red" onPress={setIsAddMode} />
-        <Button title="ADD" onPress={handleAddGoal} />
+        <View style={styles.buttonsContainer}>
+          <View style={styles.button}>
+            <Button title="CANCEL" color="red" onPress={setIsAddMode} />
+          </View>
+          <View style={styles.button}>
+          <Button title="ADD" onPress={handleAddGoal} />
+          </View>
+        </View>
       </View>
     </Modal>
   );
@@ -36,5 +47,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     width: "80%",
     marginBottom: 10,
+  },
+  buttonsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    width: "50%",
+  },
+  button: {
+    width: "40%",
   },
 });
